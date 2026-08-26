@@ -1,0 +1,65 @@
+ELEMENTAL — ACTIVARE LOGIN / REGISTER
+
+Site-ul este deja conectat în cod pentru Supabase Auth.
+Mai trebuie doar să creezi proiectul Supabase și să pui două valori publice în config.js.
+
+PASUL 1 — CREEAZĂ PROIECTUL
+1. Intră pe https://supabase.com/
+2. Creează cont / Login.
+3. New project.
+4. Alege un nume, de exemplu: elemental-game
+5. Creează proiectul.
+
+PASUL 2 — COPIAZĂ CHEILE PUBLICE
+În dashboard-ul Supabase caută Project Settings / API.
+
+Ai nevoie de:
+- Project URL
+- anon / public key
+
+NU folosi service_role key.
+
+PASUL 3 — COMPLETEAZĂ config.js
+Deschide config.js și modifică:
+
+window.ELEMENTAL_CONFIG = {
+  supabaseUrl: "PROJECT_URL",
+  supabaseAnonKey: "ANON_PUBLIC_KEY",
+  testFlightUrl: "LINK_TESTFLIGHT"
+};
+
+PASUL 4 — AUTH SETTINGS
+În Supabase Auth:
+- Email provider trebuie să fie activ.
+- Pentru test poți păstra confirmarea emailului activă.
+- Site URL: pune linkul tău GitHub Pages.
+- Adaugă linkul GitHub Pages și la Redirect URLs dacă este necesar.
+
+PASUL 5 — GITHUB PAGES
+În repository-ul site-ului înlocuiește fișierele vechi cu:
+- index.html
+- styles.css
+- app.js
+- auth.js
+- config.js
+- assets/
+- downloads/
+
+Apoi Commit changes.
+
+CE FUNCȚIONEAZĂ
+- Register cu username + email + parolă
+- Login cu email + parolă
+- sesiune salvată în browser
+- My Account
+- Logout
+- username salvat în metadata contului
+
+SECURITATE
+Cheia anon/public este făcută pentru frontend și poate fi folosită pe un site public.
+NU publica niciodată Supabase service_role key.
+
+IMPORTANT DESPRE DOWNLOADURI
+Site-ul poate arăta downloadurile după login, dar un fișier pus public în GitHub Pages
+nu devine privat doar pentru că ascunzi butonul. Pentru downloaduri private reale
+ar trebui folosit storage privat + signed URLs.

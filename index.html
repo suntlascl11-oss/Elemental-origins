@@ -4,8 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#07111f" />
-  <meta name="description" content="Descarcă ELEMENTAL pentru Windows, Android și iOS." />
-  <title>ELEMENTAL — Download</title>
+  <meta name="description" content="ELEMENTAL — cont, download și aventură elementală." />
+  <title>ELEMENTAL — Account & Download</title>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="styles.css" />
 </head>
@@ -14,7 +14,7 @@
   <div class="ambient ambient-two"></div>
 
   <header class="topbar">
-    <a href="#home" class="brand" aria-label="ELEMENTAL home">
+    <a href="#home" class="brand">
       <span class="brand-mark">E</span>
       <span>ELEMENTAL</span>
     </a>
@@ -24,6 +24,13 @@
       <a href="#features">Features</a>
       <a href="#install">Instalare</a>
     </nav>
+
+    <div class="account-actions">
+      <button id="openLoginBtn" class="button button-ghost compact">Login</button>
+      <button id="openRegisterBtn" class="button button-primary compact">Register</button>
+      <button id="accountBtn" class="button button-ghost compact hidden">My Account</button>
+      <button id="logoutBtn" class="button button-danger compact hidden">Logout</button>
+    </div>
   </header>
 
   <main>
@@ -35,20 +42,16 @@
           <span class="gradient-text">cele patru elemente.</span>
         </h1>
         <p class="hero-description">
-          Explorează lumea ELEMENTAL, descoperă Fire, Water, Earth și Air,
-          înfruntă creaturi și boss-uri și construiește-ți propriul stil de luptă.
+          Creează-ți contul ELEMENTAL, intră în lumea jocului și descarcă versiunea
+          potrivită pentru dispozitivul tău.
         </p>
 
         <div class="hero-actions">
           <a class="button button-primary" href="#download">Descarcă jocul</a>
-          <a class="button button-ghost" href="#install">Cum instalez?</a>
+          <button id="heroAccountBtn" class="button button-ghost">Creează cont</button>
         </div>
 
-        <div class="platform-row" aria-label="Platforme">
-          <span>Windows</span>
-          <span>Android</span>
-          <span>iOS</span>
-        </div>
+        <div id="authStatus" class="auth-status">Nu ești autentificat.</div>
       </div>
 
       <div class="element-orbit" aria-hidden="true">
@@ -60,14 +63,36 @@
       </div>
     </section>
 
+    <section class="account-panel hidden" id="accountPanel">
+      <div class="account-panel-inner">
+        <div>
+          <p class="eyebrow">MY ACCOUNT</p>
+          <h2>Bine ai revenit, <span id="profileName">Player</span>.</h2>
+          <p class="muted" id="profileEmail">—</p>
+        </div>
+
+        <div class="account-grid">
+          <div class="stat-card">
+            <span class="stat-label">ACCOUNT</span>
+            <strong id="profileStatus">Active</strong>
+          </div>
+          <div class="stat-card">
+            <span class="stat-label">PLATFORM</span>
+            <strong>Windows / Mobile</strong>
+          </div>
+          <div class="stat-card">
+            <span class="stat-label">GAME</span>
+            <strong>ELEMENTAL</strong>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="section" id="download">
       <div class="section-heading">
         <p class="eyebrow">DOWNLOAD</p>
         <h2>Alege platforma</h2>
-        <p>
-          Site-ul este deja pregătit pentru build-urile finale.
-          Înlocuiește fișierele placeholder din folderul <code>downloads</code>.
-        </p>
+        <p>Build-urile finale pot fi puse în folderul <code>downloads</code>.</p>
       </div>
 
       <div class="download-grid">
@@ -76,27 +101,18 @@
           <div>
             <p class="platform-label">DESKTOP</p>
             <h3>Windows</h3>
-            <p class="muted">
-              Build pentru Windows 10/11. Recomandat: arhivă ZIP cu jocul sau installer.
-            </p>
+            <p class="muted">Versiunea pentru Windows 10/11.</p>
           </div>
-
           <div class="card-meta">
             <span>64-bit</span>
             <span>Keyboard + Mouse</span>
           </div>
-
-          <a
-            class="button button-primary full"
-            href="downloads/ELEMENTAL-Windows.zip"
-            download
-          >
+          <a class="button button-primary full"
+             href="downloads/ELEMENTAL-Windows.zip"
+             download>
             Download Windows
           </a>
-
-          <p class="small-note">
-            Fișier așteptat: <strong>ELEMENTAL-Windows.zip</strong>
-          </p>
+          <p class="small-note">ELEMENTAL-Windows.zip</p>
         </article>
 
         <article class="download-card">
@@ -104,27 +120,18 @@
           <div>
             <p class="platform-label">MOBILE</p>
             <h3>Android</h3>
-            <p class="muted">
-              APK pentru telefoane și tablete Android, cu touch controls.
-            </p>
+            <p class="muted">APK pentru Android cu touch controls.</p>
           </div>
-
           <div class="card-meta">
             <span>APK</span>
             <span>Touch Controls</span>
           </div>
-
-          <a
-            class="button button-primary full"
-            href="downloads/ELEMENTAL-Android.apk"
-            download
-          >
+          <a class="button button-primary full"
+             href="downloads/ELEMENTAL-Android.apk"
+             download>
             Download Android
           </a>
-
-          <p class="small-note">
-            Fișier așteptat: <strong>ELEMENTAL-Android.apk</strong>
-          </p>
+          <p class="small-note">ELEMENTAL-Android.apk</p>
         </article>
 
         <article class="download-card featured-card">
@@ -132,36 +139,21 @@
           <div>
             <p class="platform-label">MOBILE</p>
             <h3>iPhone / iPad</h3>
-            <p class="muted">
-              Pentru iOS, distribuția normală se face prin TestFlight sau App Store.
-            </p>
+            <p class="muted">Distribuție prin TestFlight sau App Store.</p>
           </div>
-
           <div class="card-meta">
             <span>iOS</span>
             <span>TestFlight</span>
           </div>
-
-          <a
-            class="button button-primary full"
-            href="https://testflight.apple.com/"
-            data-ios-link
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          <a id="iosDownload"
+             class="button button-primary full"
+             href="https://testflight.apple.com/"
+             target="_blank"
+             rel="noopener noreferrer">
             Deschide TestFlight
           </a>
-
-          <p class="small-note">
-            În <strong>app.js</strong> înlocuiești linkul TestFlight cu linkul jocului tău.
-          </p>
+          <p class="small-note">Linkul poate fi schimbat în config.js</p>
         </article>
-      </div>
-
-      <div class="notice">
-        <strong>Important:</strong>
-        butoanele Windows și Android vor funcționa după ce copiezi build-urile finale
-        în folderul <code>downloads/</code> folosind exact numele afișate.
       </div>
     </section>
 
@@ -170,8 +162,7 @@
         <p class="eyebrow">THE WORLD OF ELEMENTAL</p>
         <h2>Patru elemente. O singură lume.</h2>
         <p class="muted large">
-          Construiește-ți personajul, explorează dimensiuni elementale,
-          luptă cu inamici și boss-uri și adună echipament, loot și essence.
+          Explorează dimensiunile elementale, luptă, adună loot și dezvoltă-ți personajul.
         </p>
       </div>
 
@@ -186,11 +177,11 @@
         </div>
         <div class="feature-item">
           <span class="feature-dot earth-dot"></span>
-          <div><strong>Earth</strong><span>forță, stone și seismic attacks</span></div>
+          <div><strong>Earth</strong><span>stone și seismic attacks</span></div>
         </div>
         <div class="feature-item">
           <span class="feature-dot air-dot"></span>
-          <div><strong>Air</strong><span>mobilitate, wind și tempest</span></div>
+          <div><strong>Air</strong><span>wind și tempest</span></div>
         </div>
       </div>
     </section>
@@ -205,36 +196,19 @@
         <article class="install-card">
           <span class="step">01</span>
           <h3>Windows</h3>
-          <p>
-            Descarcă arhiva ZIP, extrage folderul și pornește launcher-ul jocului.
-            Pentru un installer final poți publica ulterior un <code>.exe</code>.
-          </p>
+          <p>Descarcă arhiva, extrage jocul și pornește launcher-ul ELEMENTAL.</p>
         </article>
-
         <article class="install-card">
           <span class="step">02</span>
           <h3>Android</h3>
-          <p>
-            Descarcă APK-ul, permite instalarea aplicațiilor din browser/file manager
-            dacă Android solicită acest lucru, apoi instalează ELEMENTAL.
-          </p>
+          <p>Descarcă APK-ul și confirmă instalarea dacă Android solicită permisiunea.</p>
         </article>
-
         <article class="install-card">
           <span class="step">03</span>
           <h3>iOS</h3>
-          <p>
-            Apasă butonul TestFlight, acceptă invitația și instalează jocul.
-            Pentru distribuție publică, build-ul final poate fi publicat în App Store.
-          </p>
+          <p>Deschide invitația TestFlight și instalează build-ul disponibil.</p>
         </article>
       </div>
-    </section>
-
-    <section class="cta">
-      <p class="eyebrow">ELEMENTAL</p>
-      <h2>The elements are waiting.</h2>
-      <a class="button button-primary" href="#download">Alege platforma</a>
     </section>
   </main>
 
@@ -243,9 +217,65 @@
       <span class="brand-mark small">E</span>
       <span>ELEMENTAL</span>
     </div>
-    <p>Prototype download portal • Windows • Android • iOS</p>
+    <p>ELEMENTAL Account & Download Portal</p>
   </footer>
 
+  <!-- AUTH MODAL -->
+  <div id="authModal" class="modal hidden" role="dialog" aria-modal="true">
+    <div class="modal-card">
+      <button id="closeModalBtn" class="modal-close" aria-label="Închide">×</button>
+
+      <div id="loginView">
+        <p class="eyebrow">ELEMENTAL ACCOUNT</p>
+        <h2>Login</h2>
+        <p class="muted">Intră în contul tău.</p>
+
+        <form id="loginForm" class="auth-form">
+          <label>
+            Email
+            <input id="loginEmail" type="email" autocomplete="email" required />
+          </label>
+          <label>
+            Parolă
+            <input id="loginPassword" type="password" autocomplete="current-password" required minlength="6" />
+          </label>
+          <button class="button button-primary full" type="submit">Login</button>
+        </form>
+
+        <button id="switchToRegister" class="text-button">Nu ai cont? Creează unul</button>
+      </div>
+
+      <div id="registerView" class="hidden">
+        <p class="eyebrow">JOIN ELEMENTAL</p>
+        <h2>Register</h2>
+        <p class="muted">Creează-ți contul de player.</p>
+
+        <form id="registerForm" class="auth-form">
+          <label>
+            Username
+            <input id="registerUsername" type="text" autocomplete="username" required minlength="3" maxlength="24" />
+          </label>
+          <label>
+            Email
+            <input id="registerEmail" type="email" autocomplete="email" required />
+          </label>
+          <label>
+            Parolă
+            <input id="registerPassword" type="password" autocomplete="new-password" required minlength="6" />
+          </label>
+          <button class="button button-primary full" type="submit">Create Account</button>
+        </form>
+
+        <button id="switchToLogin" class="text-button">Ai deja cont? Login</button>
+      </div>
+
+      <div id="authMessage" class="message hidden"></div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="config.js"></script>
+  <script src="auth.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
