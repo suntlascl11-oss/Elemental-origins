@@ -1,0 +1,38 @@
+name: Build ELEMENTAL Android APK
+
+on:
+  workflow_dispatch:
+
+jobs:
+  android:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Android SDK
+        uses: android-actions/setup-android@v4
+
+      - name: Install Android API 36
+        run: |
+          sdkmanager "platform-tools" "platforms;android-36" "build-tools;36.0.0"
+
+      - name: Gradle executable
+        run: chmod +x gradlew
+
+      - name: Build APK
+        run: ./gradlew :android:assembleDebug --console=plain --stacktrace
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: ELEMENTAL-Android
+          path: android/build/outputs/apk/debug/*.apk
+          if-no-files-found: error
